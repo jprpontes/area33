@@ -110,7 +110,7 @@
     usernameSpan.textContent = `${username}@terminal:`;
 
     // Conexão com o servidor WebSocket
-    const socket = new WebSocket("ws://75c6-2804-5568-fa02-b00-5d9-eb9f-7c15-4956.ngrok-free.app");
+    const socket = new WebSocket("wss://ws.area33.chat");
 
     // Quando o WebSocket estiver conectado
     socket.addEventListener('open', () => {
