@@ -1,27 +1,8 @@
-/* Light-specific styles */
-body {
-    background-color: white;
-    font-family: Arial, sans-serif; /* Use a common font */
-  }
-  
-  .chat-container {
-    background-color: white;
-    color: black;
-  }
-  
-  .input-terminal .username {
-    color: blue;
-  }
-
-.trending-column {
-  background-color: white;
-  color: black;
-}
-
-.trending-column h2 {
-  color: black;
-}
-
-.trending-column ul li {
-  color: black;
+:root {
+  --background-color: white;
+  --text-color: black;
+  --username-color: blue;
+  --button-bg-color: #e0e0e0;
+  --scrollbar-thumb-color: #c0c0c0;
+  --font-family: Arial, sans-serif;
 }

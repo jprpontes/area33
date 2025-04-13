@@ -7,15 +7,17 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
   display: block;
   height: calc(100vh - 50px);
 }
 
 .navbar {
-    display: flex;
-    height: 50px;
-    align-items: center;
+  display: flex;
+  height: 50px;
+  align-items: center;
 }
 
 .container {
@@ -33,6 +35,8 @@ body {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .chat-column {
@@ -45,11 +49,14 @@ body {
   flex: 1;
   padding: 10px;
   border-radius: 5px;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .trending-column h2 {
   font-size: 18px;
   margin-bottom: 10px;
+  color: var(--text-color);
 }
 
 .trending-column ul {
@@ -60,6 +67,7 @@ body {
 .trending-column ul li {
   margin-bottom: 8px;
   font-size: 14px;
+  color: var(--text-color);
 }
 
 .input-container {
@@ -82,14 +90,17 @@ body {
   font-weight: bold;
   min-width: 20px;
   font-size: 16px;
+  color: var(--username-color);
 }
 
 input {
   flex: 1;
   padding: 10px;
   border: none;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
   font-size: 16px;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 input:focus {
@@ -101,9 +112,12 @@ button {
   display: flex;
   border: 2px solid;
   cursor: pointer;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
   align-items: center;
   font-size: 16px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-color: var(--text-color);
 }
 
 #sendButton > span {
@@ -115,7 +129,7 @@ button {
 }
 
 button:hover {
-  background-color: #003300;
+  background-color: var(--button-bg-color);
 }
 
 .theme-selector {
@@ -124,14 +138,17 @@ button:hover {
   margin-right: 8px;
   height: 35px;
   font-size: 14px;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
   border: 2px solid;
   border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-color: var(--text-color);
 }
 
 .theme-selector:focus {
   outline: none;
-  box-shadow: 0 0 5px;
+  box-shadow: 0 0 5px var(--text-color);
 }
 
 @media screen and (max-width: 768px) {
@@ -181,8 +198,9 @@ button:hover {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
+  background: var(--scrollbar-thumb-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #003300;
+  background: var(--button-bg-color);
 }
