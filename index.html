@@ -5,135 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat Anônimo</title>
   <script src="https://kit.fontawesome.com/b1df672ebf.js" crossorigin="anonymous"></script>
+  <link id="themeStylesheet" rel="stylesheet" href="./matrix-theme.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      border: 0;
-      list-style: none;
-      vertical-align: baseline;
-    }
-    body {
-      background-color: black;
-      color: green;
-      font-family: 'Courier New', Courier, monospace;
-      display: block;
-      height: 100vh;
-    }
-    .container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    .chat-container {
-      margin: 20px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      background-color: black; /* Fundo preto */
-      color: #00ff00; /* Texto verde estilo Matrix */
-    }
-    .input-container {
-      margin: 10px 20px 20px 20px;
-      display: flex;
-      flex-direction: column;
-    }
-    .chat-message {
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-    .input-terminal {
-      display: flex;
-      align-items: center;
-    }
-    .username {
-      color: #00ff00;
-      font-weight: bold;
-      min-width: 20px;
-      font-size: 16px;
-    }
-    input {
-      flex: 1;
-      padding: 10px;
-      background-color: black;
-      color: #00ff00; /* Texto verde neon */
-      border: none;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 16px;
-    }
-    input:focus {
-      outline: none;
-    }
-    button {
-      padding: 10px;
-      display: flex;
-      background-color: black;
-      color: #00ff00; /* Texto verde neon */
-      border: 2px solid #00ff00;
-      cursor: pointer;
-      font-family: 'Courier New', Courier, monospace;
-      align-items: center;
-      font-size: 16px;
-    }
-    #sendButton > span {
-      display: block;
-    }
-    #sendButton > i {
-      display: none;
-    }
-    button:hover {
-      background-color: #003300; /* Cor mais escura ao passar o mouse */
-    }
-
-    @media screen and (max-width: 768px) {
-      * {
-        font-size: 12px;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      button {
-        padding: 10px;
-        display: flex;
-        background-color: black;
-        color: #00ff00; /* Texto verde neon */
-        border: 2px solid #00ff00;
-        border-radius: 2px;
-        cursor: pointer;
-        align-items: center;
-        height: 30px;
-        width: 30px;
-      }
-      #sendButton > span {
-        display: none;
-      }
-      #sendButton > i {
-        display: block;
-      }
-      .username, input, .chat-message {
-        font-size: 13px;
-      }
-    }
-
-    /* Estilização personalizada para a barra de rolagem */
-    ::-webkit-scrollbar {
-      width: 8px; /* Largura da barra de rolagem */
-    }
-
-    ::-webkit-scrollbar-track {
-      background: black; /* Fundo da barra de rolagem */
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #00ff00; /* Cor do "polegar" da barra de rolagem */
-      border-radius: 4px; /* Bordas arredondadas */
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #003300; /* Cor ao passar o mouse */
+    .theme-selector {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
     }
   </style>
 </head>
@@ -150,6 +30,10 @@
         </button>
       </div>
     </div>
+    <select id="themeSelector" class="theme-selector">
+      <option value="matrix-theme.css">Matrix</option>
+      <option value="light-theme.css">Light</option>
+    </select>
   </div>
 
   <script>
@@ -238,6 +122,16 @@
 
     socket.addEventListener('error', (error) => {
       console.error("Erro no WebSocket:", error);
+    });
+
+    // Função para alternar entre os temas usando o select
+    const themeSelector = document.getElementById('themeSelector');
+    const themeStylesheet = document.getElementById('themeStylesheet');
+
+    themeSelector.addEventListener('change', (event) => {
+      const selectedTheme = event.target.value;
+      themeStylesheet.setAttribute('href', `${selectedTheme}?t=${new Date().getTime()}`); // Append timestamp
+      console.log("Tema alterado para:", selectedTheme.includes('light-theme.css') ? "Light" : "Matrix");
     });
   </script>
 </body>
