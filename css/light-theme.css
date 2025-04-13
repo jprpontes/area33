@@ -1,0 +1,15 @@
+/* Light-specific styles */
+body {
+    background-color: white;
+    font-family: Arial, sans-serif; /* Use a common font */
+  }
+  
+  .chat-container {
+    background-color: white;
+    color: black;
+  }
+  
+  .input-terminal .username {
+    color: blue;
+  }
+  

@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    vertical-align: baseline;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    display: block;
+    height: 100vh;
+  }
+  
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  
+  .input-container {
+    margin: 10px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-message {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .input-terminal {
+    display: flex;
+    align-items: center;
+  }
+  
+  .username {
+    font-weight: bold;
+    min-width: 20px;
+    font-size: 16px;
+  }
+  
+  input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+  }
+  
+  input:focus {
+    outline: none;
+  }
+  
+  button {
+    padding: 10px;
+    display: flex;
+    border: 2px solid black;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    font-size: 16px;
+  }
+  
+  #sendButton > span {
+    display: block;
+  }
+  
+  #sendButton > i {
+    display: none;
+  }
+  
+  button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .theme-selector {
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+  
+  .theme-selector:focus {
+    outline: none;
+    box-shadow: 0 0 5px gray;
+  }
+  
+  @media screen and (max-width: 768px) {
+    * {
+      font-size: 12px;
+    }
+  
+    button {
+      padding: 10px;
+      display: flex;
+      border: 2px solid black;
+      border-radius: 2px;
+      cursor: pointer;
+      align-items: center;
+      height: 30px;
+      width: 30px;
+    }
+  
+    #sendButton > span {
+      display: none;
+    }
+  
+    #sendButton > i {
+      display: block;
+    }
+  
+    .username, input, .chat-message {
+      font-size: 13px;
+    }
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: white;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: darkgray;
+  }
+  
