@@ -7,34 +7,36 @@
   <script src="https://kit.fontawesome.com/b1df672ebf.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./css/common-styles.css">
   <link id="themeStylesheet" rel="stylesheet" href="./css/matrix-theme.css">
-  <style>
-    .theme-selector {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 5px;
-      font-size: 14px;
-      font-family: Arial, sans-serif;
-    }
-  </style>
 </head>
 <body>
+  <select id="themeSelector" class="theme-selector">
+    <option value="matrix-theme.css">Matrix</option>
+    <option value="light-theme.css">Light</option>
+  </select>
   <div class="container">
-    <div class="chat-container" id="chat"></div>
-    <div class="input-container">
-      <div class="input-terminal">
-        <span class="username">anônimo@terminal:</span>
-        <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
-        <button id="sendButton">
-          <span>Enviar</span>
-          <i class="fa-solid fa-angle-right"></i>
-        </button>
+    <div class="chat-column">
+      <div class="chat-container" id="chat"></div>
+      <div class="input-container">
+        <div class="input-terminal">
+          <span class="username">anônimo@terminal:</span>
+          <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
+          <button id="sendButton">
+            <span>Enviar</span>
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+        </div>
       </div>
     </div>
-    <select id="themeSelector" class="theme-selector">
-      <option value="matrix-theme.css">Matrix</option>
-      <option value="light-theme.css">Light</option>
-    </select>
+    <div class="trending-column">
+      <h2>Trending Topics</h2>
+      <ul id="trendingTopics">
+        <li>#ChatAnônimo</li>
+        <li>#WebSocket</li>
+        <li>#MatrixTheme</li>
+        <li>#LightTheme</li>
+        <li>#TrendingNow</li>
+      </ul>
+    </div>
   </div>
 
   <script>
@@ -131,7 +133,7 @@
 
     themeSelector.addEventListener('change', (event) => {
       const selectedTheme = event.target.value;
-      themeStylesheet.setAttribute('href', `${selectedTheme}?t=${new Date().getTime()}`); // Append timestamp
+      themeStylesheet.setAttribute('href', `./css/${selectedTheme}?t=${new Date().getTime()}`); // Ensure correct path
       console.log("Tema alterado para:", selectedTheme.includes('light-theme.css') ? "Light" : "Matrix");
     });
   </script>

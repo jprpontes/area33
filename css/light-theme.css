@@ -12,4 +12,16 @@ body {
   .input-terminal .username {
     color: blue;
   }
-  
+
+.trending-column {
+  background-color: white;
+  color: black;
+}
+
+.trending-column h2 {
+  color: black;
+}
+
+.trending-column ul li {
+  color: black;
+}
