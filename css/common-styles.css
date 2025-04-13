@@ -51,13 +51,19 @@ body {
     width: 100%;
     height: 100%;
     max-width: 250px;
-    padding: 10px;
     border-radius: 5px;
     background-color: var(--background-color);
     color: var(--text-color);
     transition: margin 0.3s ease, opacity 0.3s ease;
     margin-right: 0;
     z-index: 1;
+    position: relative; /* Ensure close button is positioned correctly */
+}
+
+.trending-topics {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
 }
 
 .trending-column.hidden {
@@ -67,8 +73,8 @@ body {
 }
 
 .trending-column h2 {
+    flex: 1;
     font-size: 18px;
-    margin-bottom: 10px;
     color: var(--text-color);
 }
 
@@ -81,6 +87,13 @@ body {
     margin-bottom: 8px;
     font-size: 14px;
     color: var(--text-color);
+}
+
+.close-trending {
+    font-size: 20px;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
 }
 
 .input-container {
@@ -123,6 +136,8 @@ input:focus {
 button {
     padding: 10px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     border: 2px solid;
     cursor: pointer;
     font-family: var(--font-family);
@@ -183,18 +198,25 @@ button:hover {
     background-color: var(--button-bg-color);
 }
 
+.trending-column-navbar {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
 @media screen and (max-width: 768px) {
     * {
         font-size: 12px;
     }
 
-    button {
+    .sendButton {
         padding: 10px;
         display: flex;
-        border: 2px solid black;
         border-radius: 2px;
         cursor: pointer;
-        align-items: center;
         height: 30px;
         width: 30px;
     }
@@ -217,9 +239,27 @@ button:hover {
         flex-direction: column;
     }
 
+    .trending-column {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        max-width: unset;
+        width: 100%;
+        margin: 0;
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1000;
+        background-color: var(--background-color);
+        overflow-y: auto;
+    }
+
     .trending-column.hidden {
         margin-top: -100%; /* Adjust hiding direction for mobile */
         margin-right: 0; /* Reset horizontal margin */
+        opacity: 0;
+        pointer-events: none;
     }
 }
 

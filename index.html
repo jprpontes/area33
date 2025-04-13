@@ -34,8 +34,11 @@
             </div>
         </div>
         <div class="trending-column hidden">
-            <h2>Em Alta</h2>
-            <ul id="trendingTopics">
+            <div class="trending-column-navbar">
+                <h2>Em Alta</h2>
+                <button id="closeTrendingButton" class="close-trending">&times;</button>
+            </div>
+            <ul id="trendingTopics" class="trending-topics">
                 <li>#ChatAnônimo</li>
                 <li>#WebSocket</li>
                 <li>#MatrixTheme</li>
@@ -146,9 +149,14 @@
         // Toggle trending topics visibility
         const toggleTrendingButton = document.getElementById('toggleTrendingButton');
         const trendingColumn = document.querySelector('.trending-column');
+        const closeTrendingButton = document.getElementById('closeTrendingButton');
 
         toggleTrendingButton.addEventListener('click', () => {
             trendingColumn.classList.toggle('hidden');
+        });
+
+        closeTrendingButton.addEventListener('click', () => {
+            trendingColumn.classList.add('hidden');
         });
     </script>
 </body>
