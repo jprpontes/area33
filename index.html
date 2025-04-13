@@ -1,144 +1,156 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat Anônimo</title>
-  <script src="https://kit.fontawesome.com/b1df672ebf.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./css/common-styles.css">
-  <link id="themeStylesheet" rel="stylesheet" href="./css/matrix-theme.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Anônimo</title>
+    <script src="https://kit.fontawesome.com/b1df672ebf.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/common-styles.css">
+    <link id="themeStylesheet" rel="stylesheet" href="./css/matrix-theme.css">
 </head>
+
 <body>
-  <div class="navbar">
-    <select id="themeSelector" class="theme-selector">
-      <option value="matrix-theme.css">Matrix</option>
-      <option value="light-theme.css">Light</option>
-    </select>
-  </div>
+    <div class="navbar">
+        <select id="themeSelector" class="theme-selector">
+            <option value="matrix-theme.css">Matrix</option>
+            <option value="light-theme.css">Light</option>
+        </select>
+        <button id="toggleTrendingButton" class="toggle-trending">Toggle Trending</button>
+    </div>
 
-  <div class="container">
-    <div class="chat-column">
-      <div class="chat-container" id="chat"></div>
-      <div class="input-container">
-        <div class="input-terminal">
-          <span class="username">anônimo@terminal:</span>
-          <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
-          <button id="sendButton">
-            <span>Enviar</span>
-            <i class="fa-solid fa-angle-right"></i>
-          </button>
+    <div class="container">
+        <div class="chat-column">
+            <div class="chat-container" id="chat"></div>
+            <div class="input-container">
+                <div class="input-terminal">
+                    <span class="username">anônimo@terminal:</span>
+                    <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
+                    <button id="sendButton">
+                        <span>Enviar</span>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="trending-column">
+            <h2>Trending Topics</h2>
+            <ul id="trendingTopics">
+                <li>#ChatAnônimo</li>
+                <li>#WebSocket</li>
+                <li>#MatrixTheme</li>
+                <li>#LightTheme</li>
+                <li>#TrendingNow</li>
+            </ul>
+        </div>
     </div>
-    <div class="trending-column">
-      <h2>Trending Topics</h2>
-      <ul id="trendingTopics">
-        <li>#ChatAnônimo</li>
-        <li>#WebSocket</li>
-        <li>#MatrixTheme</li>
-        <li>#LightTheme</li>
-        <li>#TrendingNow</li>
-      </ul>
-    </div>
-  </div>
 
-  <script>
-    const chatContainer = document.getElementById('chat');
-    const messageInput = document.getElementById('messageInput');
-    const sendButton = document.getElementById('sendButton');
-    const usernameSpan = document.querySelector('.username');
+    <script>
+        const chatContainer = document.getElementById('chat');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const usernameSpan = document.querySelector('.username');
 
-    // Função para gerar um nome de usuário aleatório
-    const generateRandomUsername = () => {
-      const adjectives = ['rápido', 'brilhante', 'sábio', 'valente', 'misterioso'];
-      const nouns = ['gato', 'dragão', 'falcão', 'lobo', 'tigre'];
-      const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
-      const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
-      return `${randomAdjective}-${randomNoun}`;
-    };
+        // Função para gerar um nome de usuário aleatório
+        const generateRandomUsername = () => {
+            const adjectives = ['rápido', 'brilhante', 'sábio', 'valente', 'misterioso'];
+            const nouns = ['gato', 'dragão', 'falcão', 'lobo', 'tigre'];
+            const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            return `${randomAdjective}-${randomNoun}`;
+        };
 
-    // Obter ou gerar o nome de usuário
-    const getUsername = () => {
-      const today = new Date().toISOString().split('T')[0]; // Data atual no formato YYYY-MM-DD
-      const storedData = JSON.parse(localStorage.getItem('chatUsername')) || {};
-      if (storedData.date === today && storedData.username) {
-        return storedData.username;
-      }
-      const newUsername = generateRandomUsername();
-      localStorage.setItem('chatUsername', JSON.stringify({ date: today, username: newUsername }));
-      return newUsername;
-    };
+        // Obter ou gerar o nome de usuário
+        const getUsername = () => {
+            const today = new Date().toISOString().split('T')[0]; // Data atual no formato YYYY-MM-DD
+            const storedData = JSON.parse(localStorage.getItem('chatUsername')) || {};
+            if (storedData.date === today && storedData.username) {
+                return storedData.username;
+            }
+            const newUsername = generateRandomUsername();
+            localStorage.setItem('chatUsername', JSON.stringify({ date: today, username: newUsername }));
+            return newUsername;
+        };
 
-    const username = getUsername();
-    usernameSpan.textContent = `${username}@terminal:`;
+        const username = getUsername();
+        usernameSpan.textContent = `${username}@terminal:`;
 
-    // Conexão com o servidor WebSocket
-    const socket = new WebSocket("wss://ws.area33.chat");
+        // Conexão com o servidor WebSocket
+        const socket = new WebSocket("wss://ws.area33.chat");
 
-    // Quando o WebSocket estiver conectado
-    socket.addEventListener('open', () => {
-      console.log("Conectado ao servidor WebSocket");
-    });
+        // Quando o WebSocket estiver conectado
+        socket.addEventListener('open', () => {
+            console.log("Conectado ao servidor WebSocket");
+        });
 
-    // Função para adicionar mensagem ao chat
-    const addMessageToChat = (message) => {
-      const messageElement = document.createElement('div');
-      messageElement.className = 'chat-message';
-      messageElement.textContent = message; // Mensagem convertida para texto
-      chatContainer.appendChild(messageElement);
-      chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll automático
-    };
+        // Função para adicionar mensagem ao chat
+        const addMessageToChat = (message) => {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'chat-message';
+            messageElement.textContent = message; // Mensagem convertida para texto
+            chatContainer.appendChild(messageElement);
+            chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll automático
+        };
 
-    // Receber mensagens do servidor WebSocket
-    socket.addEventListener('message', (event) => {
-      console.log(event);
-      const reader = new FileReader();
-      reader.onload = () => {
-        addMessageToChat(reader.result); // Adiciona mensagem recebida ao chat
-        console.log(reader.result);
-      };
-      reader.readAsText(event.data); // Converte a mensagem binária para texto
-    });
+        // Receber mensagens do servidor WebSocket
+        socket.addEventListener('message', (event) => {
+            console.log(event);
+            const reader = new FileReader();
+            reader.onload = () => {
+                addMessageToChat(reader.result); // Adiciona mensagem recebida ao chat
+                console.log(reader.result);
+            };
+            reader.readAsText(event.data); // Converte a mensagem binária para texto
+        });
 
-    // Função para enviar mensagem via WebSocket
-    const sendMessage = () => {
-      const message = messageInput.value.trim();
-      if (message) {
-        const formattedMessage = `${username}@terminal: ${message}`;
-        socket.send(formattedMessage); // Envia a mensagem para o servidor
-        addMessageToChat(formattedMessage); // Adiciona mensagem enviada ao chat
-        messageInput.value = '';
-      }
-    };
+        // Função para enviar mensagem via WebSocket
+        const sendMessage = () => {
+            const message = messageInput.value.trim();
+            if (message) {
+                const formattedMessage = `${username}@terminal: ${message}`;
+                socket.send(formattedMessage); // Envia a mensagem para o servidor
+                addMessageToChat(formattedMessage); // Adiciona mensagem enviada ao chat
+                messageInput.value = '';
+            }
+        };
 
-    // Evento do botão "Enviar"
-    sendButton.addEventListener('click', sendMessage);
+        // Evento do botão "Enviar"
+        sendButton.addEventListener('click', sendMessage);
 
-    // Evento para o pressionar da tecla "Enter"
-    messageInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        sendMessage();
-      }
-    });
+        // Evento para o pressionar da tecla "Enter"
+        messageInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
 
-    // Caso o WebSocket seja fechado ou encontre erro
-    socket.addEventListener('close', () => {
-      console.log("Conexão com o servidor WebSocket foi encerrada");
-    });
+        // Caso o WebSocket seja fechado ou encontre erro
+        socket.addEventListener('close', () => {
+            console.log("Conexão com o servidor WebSocket foi encerrada");
+        });
 
-    socket.addEventListener('error', (error) => {
-      console.error("Erro no WebSocket:", error);
-    });
+        socket.addEventListener('error', (error) => {
+            console.error("Erro no WebSocket:", error);
+        });
 
-    // Função para alternar entre os temas usando o select
-    const themeSelector = document.getElementById('themeSelector');
-    const themeStylesheet = document.getElementById('themeStylesheet');
+        // Função para alternar entre os temas usando o select
+        const themeSelector = document.getElementById('themeSelector');
+        const themeStylesheet = document.getElementById('themeStylesheet');
 
-    themeSelector.addEventListener('change', (event) => {
-      const selectedTheme = event.target.value;
-      themeStylesheet.setAttribute('href', `./css/${selectedTheme}?t=${new Date().getTime()}`); // Ensure correct path
-      console.log("Tema alterado para:", selectedTheme.includes('light-theme.css') ? "Light" : "Matrix");
-    });
-  </script>
+        themeSelector.addEventListener('change', (event) => {
+            const selectedTheme = event.target.value;
+            themeStylesheet.setAttribute('href', `./css/${selectedTheme}?t=${new Date().getTime()}`); // Ensure correct path
+            console.log("Tema alterado para:", selectedTheme.includes('light-theme.css') ? "Light" : "Matrix");
+        });
+
+        // Toggle trending topics visibility
+        const toggleTrendingButton = document.getElementById('toggleTrendingButton');
+        const trendingColumn = document.querySelector('.trending-column');
+
+        toggleTrendingButton.addEventListener('click', () => {
+            trendingColumn.classList.toggle('hidden');
+        });
+    </script>
 </body>
+
 </html>

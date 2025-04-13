@@ -1,8 +1,8 @@
 :root {
-  --background-color: black;
-  --text-color: #00ff00;
-  --username-color: #00ff00;
-  --button-bg-color: #003300;
-  --scrollbar-thumb-color: #00ff00;
-  --font-family: "Courier New", Courier, monospace;
+    --background-color: black;
+    --text-color: #00ff00;
+    --username-color: #00ff00;
+    --button-bg-color: #003300;
+    --scrollbar-thumb-color: #00ff00;
+    --font-family: "Courier New", Courier, monospace;
 }

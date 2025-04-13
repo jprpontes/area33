@@ -1,206 +1,236 @@
 * {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  list-style: none;
-  vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    vertical-align: baseline;
 }
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: var(--font-family);
-  display: block;
-  height: calc(100vh - 50px);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    display: block;
+    height: calc(100vh - 50px);
 }
 
 .navbar {
-  display: flex;
-  height: 50px;
-  align-items: center;
+    display: flex;
+    height: 50px;
+    align-items: center;
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  width: 100%;
-  height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .chat-container {
-  margin: 20px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  background-color: var(--background-color);
-  color: var(--text-color);
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 .chat-column {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .trending-column {
-  flex: 1;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: var(--background-color);
-  color: var(--text-color);
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: margin 0.3s ease, opacity 0.3s ease;
+    margin-right: 0;
+    z-index: 1;
+}
+
+.trending-column.hidden {
+    margin-right: -100%;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .trending-column h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: var(--text-color);
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--text-color);
 }
 
 .trending-column ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .trending-column ul li {
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: var(--text-color);
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text-color);
 }
 
 .input-container {
-  margin: 10px 20px 20px 20px;
-  display: flex;
-  flex-direction: column;
+    margin: 10px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .chat-message {
-  margin-bottom: 10px;
-  font-size: 16px;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .input-terminal {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .username {
-  font-weight: bold;
-  min-width: 20px;
-  font-size: 16px;
-  color: var(--username-color);
+    font-weight: bold;
+    min-width: 20px;
+    font-size: 16px;
+    color: var(--username-color);
 }
 
 input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  font-family: var(--font-family);
-  font-size: 16px;
-  background-color: var(--background-color);
-  color: var(--text-color);
+    flex: 1;
+    padding: 10px;
+    border: none;
+    font-family: var(--font-family);
+    font-size: 16px;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 input:focus {
-  outline: none;
+    outline: none;
 }
 
 button {
-  padding: 10px;
-  display: flex;
-  border: 2px solid;
-  cursor: pointer;
-  font-family: var(--font-family);
-  align-items: center;
-  font-size: 16px;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border-color: var(--text-color);
+    padding: 10px;
+    display: flex;
+    border: 2px solid;
+    cursor: pointer;
+    font-family: var(--font-family);
+    align-items: center;
+    font-size: 16px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-color: var(--text-color);
 }
 
-#sendButton > span {
-  display: block;
+#sendButton>span {
+    display: block;
 }
 
-#sendButton > i {
-  display: none;
+#sendButton>i {
+    display: none;
 }
 
 button:hover {
-  background-color: var(--button-bg-color);
+    background-color: var(--button-bg-color);
 }
 
 .theme-selector {
-  margin-left: auto;
-  padding: 0px 8px;
-  margin-right: 8px;
-  height: 35px;
-  font-size: 14px;
-  font-family: var(--font-family);
-  border: 2px solid;
-  border-radius: 4px;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border-color: var(--text-color);
+    margin-left: auto;
+    padding: 0px 8px;
+    margin-right: 8px;
+    height: 35px;
+    font-size: 14px;
+    font-family: var(--font-family);
+    border: 2px solid;
+    border-radius: 4px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-color: var(--text-color);
 }
 
 .theme-selector:focus {
-  outline: none;
-  box-shadow: 0 0 5px var(--text-color);
+    outline: none;
+    box-shadow: 0 0 5px var(--text-color);
+}
+
+.toggle-trending {
+    padding: 0px 8px;
+    height: 35px;
+    font-size: 14px;
+    font-family: var(--font-family);
+    border: 2px solid;
+    border-radius: 4px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-color: var(--text-color);
+    cursor: pointer;
+}
+
+.toggle-trending:hover {
+    background-color: var(--button-bg-color);
 }
 
 @media screen and (max-width: 768px) {
-  * {
-    font-size: 12px;
-  }
+    * {
+        font-size: 12px;
+    }
 
-  button {
-    padding: 10px;
-    display: flex;
-    border: 2px solid black;
-    border-radius: 2px;
-    cursor: pointer;
-    align-items: center;
-    height: 30px;
-    width: 30px;
-  }
+    button {
+        padding: 10px;
+        display: flex;
+        border: 2px solid black;
+        border-radius: 2px;
+        cursor: pointer;
+        align-items: center;
+        height: 30px;
+        width: 30px;
+    }
 
-  #sendButton > span {
-    display: none;
-  }
+    #sendButton>span {
+        display: none;
+    }
 
-  #sendButton > i {
-    display: block;
-  }
+    #sendButton>i {
+        display: block;
+    }
 
-  .username, input, .chat-message {
-    font-size: 13px;
-  }
+    .username,
+    input,
+    .chat-message {
+        font-size: 13px;
+    }
 
-  .container {
-    flex-direction: column;
-  }
+    .container {
+        flex-direction: column;
+    }
 
-  .chat-container {
-    flex: 1;
-  }
+    .chat-container {
+        flex: 1;
+    }
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: black;
+    background: black;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background: var(--scrollbar-thumb-color);
+    border-radius: 4px;
+    background: var(--scrollbar-thumb-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--button-bg-color);
+    background: var(--button-bg-color);
 }
